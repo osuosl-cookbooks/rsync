@@ -3,7 +3,7 @@ class Chef
     class RsyncServe < LWRPBase
       self.resource_name = :rsync_serve
       actions :add, :remove
-      default action :add
+      default_action :add
 
       # man rsyncd.conf for more info on each attribute
       attribute :name, :kind_of => String, :name_attribute => true
