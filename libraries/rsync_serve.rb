@@ -37,7 +37,7 @@ class Chef
       attribute :dont_compress, :kind_of  =>  String
       attribute :lock_file, :kind_of => String
       attribute :refuse_options, :kind_of => String
-      attribute :restart_service, :kind_of => [TrueClass,FalseClass], :default => true
+      attribute :restart_service, :kind_of => [TrueClass, FalseClass], :default => true
     end
   end
   class Provider
@@ -51,25 +51,26 @@ class Chef
       end
 
       protected
+
       def write_conf
         g_m = global_modules
         r_m = rsync_modules
-    
+
         t = template(new_resource.config_path) do
-          source   'rsyncd.conf.erb'
+          source 'rsyncd.conf.erb'
           cookbook 'rsync'
-          owner    'root'
-          group    'root'
-          mode     '0640'
+          owner 'root'
+          group 'root'
+          mode '0640'
           variables(
             :globals => g_m,
             :modules => r_m
           )
           notifies :restart, "service[#{node['rsyncd']['service']}]", :delayed if new_resource.restart_service
         end
-    
+
         new_resource.updated_by_last_action(t.updated?)
-    
+
         service node['rsyncd']['service'] do
           action :nothing
         end
@@ -111,7 +112,7 @@ class Chef
           write_only
         )
       end
-    
+
       # The list of rsync server resources in the resource collection
       #
       # @return [Array<Chef::Resource>]
@@ -120,7 +121,7 @@ class Chef
           resource.is_a?(Chef::Resource::RsyncServe)
         end
       end
-    
+
       # Expand "snake_case_things" to "snake case things".
       #
       # @param [String] string
@@ -129,7 +130,7 @@ class Chef
       def snake_to_space(string)
         string.to_s.gsub(/_/, ' ')
       end
-    
+
       # The list of rsync modules defined in the resource collection.
       #
       # @return [Hash]
@@ -143,11 +144,11 @@ class Chef
               hash[resource.name][snake_to_space(key)] = value
             end
           end
-    
+
           hash
         end
       end
-    
+
       # The global rsync configuration
       #
       # @return [Hash]
