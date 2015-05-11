@@ -37,7 +37,7 @@ class Chef
       attribute :dont_compress, :kind_of  =>  String
       attribute :lock_file, :kind_of => String
       attribute :refuse_options, :kind_of => String
-      attribute :service_action, :kind_of => Symbol, :default => :restart
+      attribute :restart_service, :kind_of => [TrueClass,FalseClass], :default => true
     end
   end
   class Provider
@@ -65,7 +65,7 @@ class Chef
             :globals => g_m,
             :modules => r_m
           )
-          notifies new_resource.service_action, "service[#{node['rsyncd']['service']}]", :delayed
+          notifies :restart, "service[#{node['rsyncd']['service']}]", :delayed if new_resource.restart_service
         end
     
         new_resource.updated_by_last_action(t.updated?)
