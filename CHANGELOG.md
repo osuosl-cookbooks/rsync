@@ -1,3 +1,8 @@
+v1.0.0 (2015-05-12)
+-------------------
+- Convert LWRP to a library
+- Allow ability to not start rsync service if being used with xinetd
+
 v0.8.6 (2014-09-30)
 -------------------
 - [#11] Fixes to allow rsync daemon to be started if not up.
