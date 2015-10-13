@@ -136,7 +136,10 @@ class Chef
       # @return [Hash]
       def rsync_modules
         rsync_resources.reduce({}) do |hash, resource|
-          if resource.config_path == new_resource.config_path && resource.action == :add
+          if resource.config_path == new_resource.config_path && (
+            resource.action == :add ||
+            resource.action.include?(:add)
+          )
             hash[resource.name] ||= {}
             resource_attributes.each do |key|
               value = resource.send(key)
