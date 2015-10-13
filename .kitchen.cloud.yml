@@ -96,3 +96,6 @@ suites:
   - name: networking
     run_list:
       - recipe[fake::networking]
+  - name: xinetd
+    run_list:
+      - recipe[fake::xinetd]
