@@ -1,3 +1,7 @@
+1.0.2 (2016-07-05)
+------------------
+- Add matchers for the rsync_serve LWRP
+
 v1.0.0 (2015-05-12)
 -------------------
 - Convert LWRP to a library
