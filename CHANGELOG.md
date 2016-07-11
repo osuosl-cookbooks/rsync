@@ -1,3 +1,7 @@
+1.0.3 (2016-07-11)
+------------------
+- Fix some chef warnings
+
 1.0.2 (2016-07-05)
 ------------------
 - Add matchers for the rsync_serve LWRP
