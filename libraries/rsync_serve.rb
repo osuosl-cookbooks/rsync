@@ -1,7 +1,7 @@
 class Chef
   class Resource
     class RsyncServe < LWRPBase
-      self.resource_name = :rsync_serve
+      resource_name :rsync_serve
       actions :add, :remove
       default_action :add
 
@@ -42,6 +42,8 @@ class Chef
   end
   class Provider
     class RsyncServe < LWRPBase
+      provides :rsync_serve
+
       action :add do
         write_conf
       end
