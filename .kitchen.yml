@@ -24,7 +24,7 @@ suites:
       - recipe[test::read_only]
   - name: networking
     run_list:
-      - recipe[fake::networking]
+      - recipe[test::networking]
   - name: xinetd
     run_list:
-      - recipe[fake::xinetd]
+      - recipe[test::xinetd]
