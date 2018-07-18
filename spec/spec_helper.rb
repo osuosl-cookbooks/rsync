@@ -1,5 +1,8 @@
 require 'chefspec'
+require 'chefspec/berkshelf'
 
 RSpec.configure do |config|
-  config.expect_with(:rspec) { |c| c.syntax = :expect }
+  config.color = true               # Use color in STDOUT
+  config.formatter = :documentation # Use the specified formatter
+  config.log_level = :error         # Avoid deprecation notice SPAM
 end

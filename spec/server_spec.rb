@@ -1,9 +1,14 @@
 require 'spec_helper'
 
 describe 'rsync::server' do
+  before :each do
+    allow(File).to receive(:exist?).and_call_original
+    allow(File).to receive(:exist?).with('/etc/rsyncd.conf').and_return(true)
+  end
+
   context 'on rhel' do
-    let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'redhat', version: '6.3').converge(described_recipe)
+    cached(:chef_run) do
+      ChefSpec::SoloRunner.new(platform: 'centos', version: '6.9').converge('rsync::server')
     end
 
     it 'includes the default recipe' do
@@ -42,8 +47,8 @@ describe 'rsync::server' do
   end
 
   context 'on debian' do
-    let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '12.04').converge(described_recipe)
+    cached(:chef_run) do
+      ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04').converge('rsync::server')
     end
 
     it 'includes the default recipe' do

@@ -1,3 +1,5 @@
+apt_update 'update' if platform_family?('debian')
+
 include_recipe 'rsync::server'
 
 rsync_serve 'centos-prod' do
@@ -13,4 +15,8 @@ rsync_serve 'centos-prod' do
   max_connections  10
   transfer_logging true
   log_file         '/tmp/centos-sync'
+  prexfer_exec     '/bin/true'
+  postxfer_exec    '/bin/true'
+  incoming_chmod   'a=r,u+w,D+x'
+  outgoing_chmod   'a=r,u+w,D+x'
 end

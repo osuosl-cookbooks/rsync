@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: rsync
+# Cookbook:: rsync
 # Attribute:: default
 #
-# Copyright 2012-2013, Chef Software, Inc.
+# Copyright:: 2012-2016, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,14 +16,14 @@
 # See the License for the specific language governing permissions and
 #
 
-case node['platform_family']
-when 'rhel'
-  default['rsyncd']['service'] = 'rsyncd'
-when 'debian'
-  default['rsyncd']['service'] = 'rsync'
-else
-  default['rsyncd']['service'] = 'rsyncd'
-end
+default['rsyncd']['service'] = case node['platform_family']
+                               when 'rhel'
+                                 'rsyncd'
+                               when 'debian'
+                                 'rsync'
+                               else
+                                 'rsyncd'
+                               end
 
 default['rsyncd']['config']  = '/etc/rsyncd.conf'
 default['rsyncd']['globals'] = {}

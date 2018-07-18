@@ -1,5 +1,4 @@
 if defined?(ChefSpec)
-
   def add_rsync_serve(resource_name)
     ChefSpec::Matchers::ResourceMatcher
       .new(:rsync_serve, :add, resource_name)
