@@ -1,24 +1,27 @@
-driver_plugin: vagrant
-driver_config:
-  require_chef_omnibus: true
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+  deprecations_as_errors: true
+
+verifier:
+  name: inspec
 
 platforms:
-  - name: ubuntu-12.04
-    run_list:
-      - recipe[apt]
   - name: centos-6.7
   - name: centos-7.1
 
 suites:
   - name: default
     run_list:
-      - recipe[rsync::default]
+      - recipe[test::default]
   - name: simple
     run_list:
-      - recipe[fake::simple]
-  - name: read_only
+      - recipe[test::simple]
+  - name: read-only
     run_list:
-      - recipe[fake::read_only]
+      - recipe[test::read_only]
   - name: networking
     run_list:
       - recipe[fake::networking]

@@ -1,8 +1,8 @@
 source 'https://supermarket.chef.io'
 
-group :integration do
-  cookbook 'apt', '~> 2.0'
-  cookbook 'fake', path: 'test/fixtures/cookbooks/fake'
-end
-
 metadata
+
+group :integration do
+  cookbook 'apt'
+  cookbook 'test', path: 'test/fixtures/cookbooks/test'
+end
